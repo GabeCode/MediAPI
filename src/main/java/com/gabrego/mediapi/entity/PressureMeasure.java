@@ -29,6 +29,15 @@ public class PressureMeasure {
     @Column(name = "time", nullable = false)
     private Time time;
 
+    @Column(name = "systolic_pressure", length = 7, precision = 2)
+    private double systolic_pressure;
+
+    @Column(name = "diastolic_pressure", length = 7, precision = 2)
+    private double diastolic_pressure;
+
+    @Column(name = "heart_rate", length = 7, precision = 2)
+    private double heart_rate;
+
     @Column(name = "comments")
     private String comments;
 
@@ -51,12 +60,15 @@ public class PressureMeasure {
     public PressureMeasure() {
     }
 
-    public PressureMeasure(int id, double measure, GlucoUnits units, java.sql.Date date, Time time, String comments, User user_id, Status status) {
+    public PressureMeasure(int id, double measure, GlucoUnits units, java.sql.Date date, Time time, double systolic_pressure, double diastolic_pressure, double heart_rate, String comments, User user_id, Status status) {
         this.id = id;
         this.measure = measure;
         this.units = units;
         this.date = date;
         this.time = time;
+        this.systolic_pressure = systolic_pressure;
+        this.diastolic_pressure = diastolic_pressure;
+        this.heart_rate = heart_rate;
         this.comments = comments;
         this.user_id = user_id;
         this.status = status;
@@ -102,6 +114,30 @@ public class PressureMeasure {
         this.time = time;
     }
 
+    public double getSystolic_pressure() {
+        return systolic_pressure;
+    }
+
+    public void setSystolic_pressure(double systolic_pressure) {
+        this.systolic_pressure = systolic_pressure;
+    }
+
+    public double getDiastolic_pressure() {
+        return diastolic_pressure;
+    }
+
+    public void setDiastolic_pressure(double diastolic_pressure) {
+        this.diastolic_pressure = diastolic_pressure;
+    }
+
+    public double getHeart_rate() {
+        return heart_rate;
+    }
+
+    public void setHeart_rate(double heart_rate) {
+        this.heart_rate = heart_rate;
+    }
+
     public String getComments() {
         return comments;
     }
@@ -140,5 +176,24 @@ public class PressureMeasure {
 
     public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
+    }
+
+    @Override
+    public String toString() {
+        return "PressureMeasure{" +
+                "id=" + id +
+                ", measure=" + measure +
+                ", units=" + units +
+                ", date=" + date +
+                ", time=" + time +
+                ", systolic_pressure=" + systolic_pressure +
+                ", diastolic_pressure=" + diastolic_pressure +
+                ", heart_rate=" + heart_rate +
+                ", comments='" + comments + '\'' +
+                ", user_id=" + user_id +
+                ", status=" + status +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                '}';
     }
 }
