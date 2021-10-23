@@ -29,6 +29,9 @@ public class GlucoMeasure {
     @Column(name = "time", nullable = false)
     private Time time;
 
+    @Column(name = "comments")
+    private String comments;
+
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user_id;
@@ -97,6 +100,14 @@ public class GlucoMeasure {
         this.time = time;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
     public User getUser_id() {
         return user_id;
     }
@@ -137,6 +148,7 @@ public class GlucoMeasure {
                 ", units=" + units +
                 ", date=" + date +
                 ", time=" + time +
+                ", comments='" + comments + '\'' +
                 ", user_id=" + user_id +
                 ", status=" + status +
                 ", created_at=" + created_at +
