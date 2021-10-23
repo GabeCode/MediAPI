@@ -16,13 +16,6 @@ public class PressureMeasure {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "measure", nullable = false, length = 7, precision = 2)
-    private double measure;
-
-    @ManyToOne
-    @JoinColumn(name = "units_id", referencedColumnName = "id")
-    private GlucoUnits units;
-
     @Column(name = "date", nullable = false)
     private java.sql.Date date;
 
@@ -60,10 +53,8 @@ public class PressureMeasure {
     public PressureMeasure() {
     }
 
-    public PressureMeasure(int id, double measure, GlucoUnits units, java.sql.Date date, Time time, double systolic_pressure, double diastolic_pressure, double heart_rate, String comments, User user_id, Status status) {
+    public PressureMeasure(int id, java.sql.Date date, Time time, double systolic_pressure, double diastolic_pressure, double heart_rate, String comments, User user_id, Status status) {
         this.id = id;
-        this.measure = measure;
-        this.units = units;
         this.date = date;
         this.time = time;
         this.systolic_pressure = systolic_pressure;
@@ -80,22 +71,6 @@ public class PressureMeasure {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public double getMeasure() {
-        return measure;
-    }
-
-    public void setMeasure(double measure) {
-        this.measure = measure;
-    }
-
-    public GlucoUnits getUnits() {
-        return units;
-    }
-
-    public void setUnits(GlucoUnits units) {
-        this.units = units;
     }
 
     public java.sql.Date getDate() {
@@ -182,8 +157,6 @@ public class PressureMeasure {
     public String toString() {
         return "PressureMeasure{" +
                 "id=" + id +
-                ", measure=" + measure +
-                ", units=" + units +
                 ", date=" + date +
                 ", time=" + time +
                 ", systolic_pressure=" + systolic_pressure +
