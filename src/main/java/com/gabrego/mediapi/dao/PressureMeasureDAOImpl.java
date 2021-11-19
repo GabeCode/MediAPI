@@ -2,11 +2,13 @@ package com.gabrego.mediapi.dao;
 
 import com.gabrego.mediapi.entity.PressureMeasure;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -47,7 +49,9 @@ public class PressureMeasureDAOImpl implements PressureMeasureDAO {
     @Override
     public void save(PressureMeasure pressureMeasure) {
         Session currentSession = entityManager.unwrap(Session.class);
+        Transaction transaction = currentSession.beginTransaction();
         currentSession.saveOrUpdate(pressureMeasure);
+        transaction.commit();
     }
 
     @Override
@@ -58,10 +62,11 @@ public class PressureMeasureDAOImpl implements PressureMeasureDAO {
         return theQuery.executeUpdate();
     }
 
+    @Transactional
     @Override
     public int deleteByUserId(int id) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<PressureMeasure> theQuery = currentSession.createQuery("FROM PressureMeasure WHERE user_id.id=:idUser", PressureMeasure.class);
+        Query<PressureMeasure> theQuery = currentSession.createQuery("FROM PressureMeasure WHERE user_id.id=:idUser");
         theQuery.setParameter("idUser", id);
         return theQuery.executeUpdate();
     }
